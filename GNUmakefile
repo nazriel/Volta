@@ -116,20 +116,12 @@ clean:
 	@rm -rf .pkg
 	@rm -rf volt.tar.gz
 
-$(RUN_TARGET): $(TARGET) $(RT_HOST) test/simple.volt
-	@echo "  VOLT   $(RUN_TARGET)"
-	@./$(TARGET) $(RUN_FLAGS) -o a.out.exe test/simple.volt
-
-sanity: $(RUN_TARGET)
-	@echo "  SANITY a.out.exe"
-	@./a.out.exe; test $$? -eq 42
-
-run: $(RUN_TARGET)
-	@echo "  RUN    a.out.exe"
-	@-./a.out.exe
+run: $(TARGET) $(RT_HOST)
+	@./$(TARGET) --internal-dbg test/simple.volt throw.bc -l stdc++
+	@-./a.out
 
 debug: $(TARGET) $(RT_HOST)
-	@gdb --args ./$(TARGET) $(RUN_FLAGS) -o a.out.exe test/simple.volt
+	@gdb --args ./$(TARGET) --internal-dbg test/simple.volt throw.bc -l stdc++
 
 license: $(TARGET)
 	@./$(TARGET) --license

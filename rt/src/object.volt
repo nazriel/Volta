@@ -238,5 +238,7 @@ extern(C) {
 	@mangledName("llvm.memmove.p0i8.p0i8.i64") void __llvm_memmove_p0i8_p0i8_i64(void*, void*, ulong, int, bool);
 	@mangledName("llvm.va_start") void __llvm_volt_va_start(void*);
 	@mangledName("llvm.va_end") void __llvm_volt_va_end(void*);
+	@mangledName("llvm.eh.typeid.for") int __llvm_typeid_for(void*);
+	@mangledName("vrt_eh_personality_v0") void __llvm_personality();
 }
 

@@ -30,7 +30,12 @@ extern(C) int main(int c, char** argv)
 		args[i] = cast(immutable(char)[]) argv[i][0 .. strlen(argv[i])];
 	}
 
-	int ret = vmain(args);
+	int ret;
+	try {
+		ret = vmain(args);
+	} catch (Throwable t) {
+
+	}
 
 	vrt_gc_shutdown();
 
